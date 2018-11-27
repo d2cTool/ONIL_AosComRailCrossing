@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{94EA230E-C8A6-429F-99BD-854E1B7EACDE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AosComWrapper</RootNamespace>
+    <AssemblyName>AosComWrapper</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unicode Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\..\..\..\Bin\$(Configuration)\$(TargetFrameworkVersion)\AosComRailCrossing\</OutputPath>
+    <WrapperFileName>$(AssemblyName)_140ud</WrapperFileName>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Unicode Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\..\..\Bin\$(Configuration)\$(TargetFrameworkVersion)\AosComRailCrossing\</OutputPath>
+    <WrapperFileName>$(AssemblyName)_140u</WrapperFileName>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DllExportIdent>1979D089-139C-4894-AAE9-57233840B7AD</DllExportIdent>
+    <DllExportMetaLibName>DllExport.dll</DllExportMetaLibName>
+    <DllExportNamespace>AosComWrapper</DllExportNamespace>
+    <DllExportDDNSCecil>true</DllExportDDNSCecil>
+    <DllExportSkipOnAnyCpu>false</DllExportSkipOnAnyCpu>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DllExportOrdinalsBase>1</DllExportOrdinalsBase>
+    <DllExportGenExpLib>true</DllExportGenExpLib>
+    <DllExportOurILAsm>false</DllExportOurILAsm>
+    <DllExportLeaveIntermediateFiles>false</DllExportLeaveIntermediateFiles>
+    <DllExportTimeout>30000</DllExportTimeout>
+    <DllExportPeCheck>2</DllExportPeCheck>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DllExport, PublicKeyToken=8337224c9ad9e356">
+      <HintPath>$(SolutionDir)..\Src\Products\AOS\AosComRailCrossing\packages\DllExport.1.6.1\gcache\metalib\$(DllExportNamespace)\$(DllExportMetaLibName)</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\..\..\..\..\Solutions\packages\NLog.4.4.13\lib\net40\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Wrapper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AosComDevice\AosComDevice.csproj">
+      <Project>{9d8f6e06-57fa-4803-8c87-20182e5cf665}</Project>
+      <Name>AosComDevice</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DeviceManager\DeviceManager.csproj">
+      <Project>{bbcf3043-3da9-47ba-800f-55f9a49683c6}</Project>
+      <Name>DeviceManager</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ImportGroup Label=".NET DllExport">
+    <Import Project="$(SolutionDir)..\Src\Products\AOS\AosComRailCrossing\packages\DllExport.1.6.1\tools\net.r_eg.DllExport.targets" Condition="Exists('$(SolutionDir)..\Src\Products\AOS\AosComRailCrossing\packages\DllExport.1.6.1\tools\net.r_eg.DllExport.targets')" Label="8337224c9ad9e356" />
+  </ImportGroup>
+  <Target Name="DllExportRestorePkg" BeforeTargets="PrepareForBuild">
+    <Warning Condition="!Exists('$(SolutionDir)DllExport.bat')" Text="We can't find 'DllExport.bat' in '$(SolutionDir)' - https://github.com/3F/DllExport" />
+    <Exec Condition="('$(DllExportModImported)' != 'true' Or !Exists('$(SolutionDir)..\Src\Products\AOS\AosComRailCrossing\packages\DllExport.1.6.1\tools\net.r_eg.DllExport.targets')) And Exists('$(SolutionDir)DllExport.bat')" Command="cd &quot;$(SolutionDir)&quot; &amp; DllExport.bat  -action Restore" />
+  </Target>
+  <Target Name="DllExportRPkgDynamicImport" BeforeTargets="PostBuildEvent" DependsOnTargets="GetFrameworkPaths" Condition="'$(DllExportModImported)' != 'true' And '$(DllExportRPkgDyn)' != 'false'">
+    <MSBuild BuildInParallel="true" UseResultsCache="true" Projects="$(MSBuildProjectFullPath)" Properties="DllExportRPkgDyn=true" Targets="Build" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+      copy /Y "$(TargetDir)$(ProjectName).dll" "$(TargetDir)$(ProjectName)_.dll"
+      copy /Y "$(TargetDir)\x86\$(ProjectName).dll" "$(TargetDir)$(ProjectName).dll"
+      md "$(TargetDir)..\..\..\..\Lib\$(Configuration)\v120_xp\AosComRailCrossing\"
+
+      md "$(TargetDir)..\..\v120_xp\AosComRailCrossing\"
+
+      copy /Y "$(TargetDir)$(ProjectName).dll" "$(TargetDir)..\..\v120_xp\AosComRailCrossing\"
+
+      md "$(TargetDir)..\..\..\..\Lib\$(Configuration)\v120_xp\AosComRailCrossing\"
+      copy /Y "$(TargetDir)x86\$(ProjectName).lib" "$(TargetDir)..\..\..\..\Lib\$(Configuration)\v120_xp\AosComRailCrossing\"
+
+      copy /Y "$(TargetDir)NLog.dll" "$(TargetDir)..\..\v120_xp\AosComRailCrossing\"
+      copy /Y "$(TargetDir)NLog.xml" "$(TargetDir)..\..\v120_xp\AosComRailCrossing\"
+      copy /Y "$(TargetDir)NLog.config" "$(TargetDir)..\..\v120_xp\AosComRailCrossing\"
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>
